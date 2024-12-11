@@ -52,11 +52,80 @@ const Button = ({ value }) => {
         })
     }
 
-    const handleOptBtnClick = () => {
+
+    // Handle if an operator button is clicked
+    const signClick = () => {
+        setCalc({
+            sign: value,
+            res: !calc.res && calc.num ? calc.num : calc.res,
+            num: 0
+        })
+    }
+
+    // Change result when user clicks equals button
+    const equalsClick = () => {
+
+        if(calc.num && calc.res){
+            const doMath = (a, b, sign) => {
+                switch(sign){
+                    case '+': 
+                        return (a + b)
+                    case '-':
+                        return (a - b)
+                    case 'x': 
+                        return (a * b)
+                    case '÷':
+                        return(a / b)
+                    default:
+                        return (a + b)
+                }
+                // const result = {
+                //     '+': a + b,
+                //     '-': a - b,
+                //     'x': a * b,
+                //     '÷': a / b
+                // }
+                // return result[sign](a, b)
+            }
+            setCalc({
+                res: doMath(calc.res, calc.num, calc.sign),
+                sign: '',
+                num: 0
+            })
+        }
+    }
+
+    // User clicks percent symbol
+    const percentClick = () => {
+        setCalc({
+            num: (calc.num/100),
+            res: (calc.res/100),
+            sign: ''
+        })
+
+    }
+
+    // Handle the user clicking the sign button
+    const negClick = () => {
+        setCalc({
+            num: calc.num ? -1*calc.num : 0,
+            res: calc.res ? -1*calc.res : 0,
+            sign: ''
+        })
+    }
+
+    const handleBtnClick = () => {
         console.log(value)
         const results = {
             '.': commaClick,
-            'C': resetClick
+            'C': resetClick,
+            '÷': signClick,
+            'x': signClick,
+            '+': signClick,
+            '-': signClick,
+            '=': equalsClick,
+            '%': percentClick,
+            '+/-': negClick
         }
         if(results[value]){
             return results[value]()
@@ -65,7 +134,7 @@ const Button = ({ value }) => {
         }
     }
   return (
-    <button onClick={handleOptBtnClick} className={`${getStyleName(value)} button`}>{value}</button>
+    <button onClick={handleBtnClick} className={`${getStyleName(value)} button`}>{value}</button>
   )
 }
 
