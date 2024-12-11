@@ -5,7 +5,7 @@ export const CalcContext = createContext()
 const CalcProvider = ({ children }) => {
     const [calc, setCalc] = useState({
         sign: "",
-        num: 4000000,
+        num: 0,
         res: 0
     });
 

@@ -25,13 +25,18 @@ body{
 }
 
 .screen {
-  height: 4rem;
-  margin-bottom: 4rem;
+  height: 5.5rem;
+  margin-bottom: 2rem;
+  color: var(--button-color);
+  text-align: right;
+  background-color: var(--text-color);
+  border-radius: .5rem;
+  padding: 10px;
 }
 
 .wrapper {
   background: var(--cal-color);
-  width: 20rem;
+  width: 22rem;
   padding: 2rem;
   margin-top: 4rem;
   border-radius: 1rem;
